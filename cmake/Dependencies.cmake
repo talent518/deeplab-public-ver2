@@ -170,3 +170,7 @@ endif()
 if(BUILD_docs)
   find_package(Doxygen)
 endif()
+
+find_package(MATIO REQUIRED)
+include_directories(${MATIO_INCLUDE_DIR})
+list(APPEND Caffe_LINKER_LIBS ${MATIO_LIBRARIES})
