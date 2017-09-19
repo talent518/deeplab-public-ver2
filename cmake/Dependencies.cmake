@@ -1,5 +1,5 @@
 # This list is required for static linking and exported to CaffeConfig.cmake
-set(Caffe_LINKER_LIBS "")
+set(Caffe_LINKER_LIBS "-lmatio")
 
 # ---[ Boost
 find_package(Boost 1.46 REQUIRED COMPONENTS system thread filesystem)

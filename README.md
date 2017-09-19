@@ -103,3 +103,15 @@ Suppose the codes are located at deeplab/code
 ### Python
 
 Seyed Ali Mousavi has implemented a python version of run_pascal.sh (Thanks, Ali!). If you are more familiar with Python, you may want to take a look at [this](https://github.com/TheLegendAli/CCVL).
+
+### 编译要求
+  1. 必须是gcc 5.0以上版本；
+  2. 必须安装库：opencv,boost,matio,cuda,hdf5,atlas,blas,protobuf,glob,gflags；
+  3. cmake编译时需要禁用cudnn，命令如下：
+    ```
+    mkdir build
+    cd build
+    cmake .. -DUSE_CUDNN=OFF
+    make
+    ```
+  4. 
