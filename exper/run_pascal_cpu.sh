@@ -60,6 +60,8 @@ if [ -f $INIT ]; then
     sh $INIT
 fi
 
+find $CONFIG_DIR -type f | xargs sed -i 's|GPU|CPU|g'
+
 if [ ${RUN_TRAIN} -eq 1 ]; then
     #
     LIST_DIR=${EXP}/list
