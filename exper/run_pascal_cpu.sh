@@ -75,7 +75,7 @@ if [ ${RUN_TRAIN} -eq 1 ]; then
     MODEL=${EXP}/model/${NET_ID}/init.caffemodel
     #
     echo Training net ${EXP}/${NET_ID}
-    for pname in "train solver"; do
+    for pname in train solver; do
 		sed "$(eval echo $(cat sub.sed))" ${CONFIG_DIR}/${pname}.prototxt > ${CONFIG_DIR}/${pname}_${TRAIN_SET}.prototxt
     done
     CMD="${CAFFE_BIN} train --solver=${CONFIG_DIR}/solver_${TRAIN_SET}.prototxt" 
@@ -89,7 +89,7 @@ fi
 
 if [ ${RUN_TEST} -eq 1 ]; then
     #
-    for TEST_SET in "val"; do
+    for TEST_SET in val; do
 		TEST_ITER=`cat ${EXP}/list/${TEST_SET}.txt | wc -l`
 		MODEL=${EXP}/model/${NET_ID}/test.caffemodel
 		if [ ! -f ${MODEL} ]; then
@@ -127,7 +127,7 @@ if [ ${RUN_TRAIN2} -eq 1 ]; then
     fi
     #
     echo Training2 net ${EXP}/${NET_ID}
-    for pname in "train solver2"; do
+    for pname in train solver2; do
 		sed "$(eval echo $(cat sub.sed))" ${CONFIG_DIR}/${pname}.prototxt > ${CONFIG_DIR}/${pname}_${TRAIN_SET}.prototxt
     done
     CMD="${CAFFE_BIN} train --solver=${CONFIG_DIR}/solver2_${TRAIN_SET}.prototxt --weights=${MODEL}"
@@ -138,7 +138,7 @@ fi
 
 if [ ${RUN_TEST2} -eq 1 ]; then
     #
-    for TEST_SET in "val test"; do
+    for TEST_SET in val test; do
 		TEST_ITER=`cat ${EXP}/list/${TEST_SET}.txt | wc -l`
 		MODEL=${EXP}/model/${NET_ID}/test2.caffemodel
 		if [ ! -f ${MODEL} ]; then
