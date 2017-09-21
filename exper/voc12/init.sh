@@ -5,7 +5,7 @@ DIR=$(dirname $0)
 mkdir -p $DIR/log $DIR/res $DIR/features $DIR/features2
 
 if [ ! -f "$DIR/dataset/test.txt" ]; then
-    cat voc12.* | tar -zxvf - -C $DIR
+    cat $DIR/voc12.* | tar -zxvf - -C $DIR
 fi
 
 if [ ! -f "$DIR/dataset/PPMImages/$(tail -n 1 $DIR/dataset/test.txt).ppm" ]; then
