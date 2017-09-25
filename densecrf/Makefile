@@ -4,18 +4,10 @@ CC	= g++
 CFLAGS	= -W -Wall -O2
 #CFLAGS	= -W -Wall -g
 
-all:
-	make clean
-	make prog_test_densecrf
-	make prog_refine_pascal
-	make prog_refine_pascal_v4
+all: prog_test_densecrf prog_refine_pascal prog_refine_pascal_v4 prog_bin2ppm
 
 clean:
-	rm -f *.a
-	rm -f *.o
-	rm -f prog_test_densecrf
-	rm -f prog_refine_pascal
-	rm -f prog_refine_pascal_v4
+	rm -f *.a *.o prog_test_densecrf prog_refine_pascal prog_refine_pascal_v4 prog_bin2ppm
 
 libDenseCRF.a: libDenseCRF/bipartitedensecrf.cpp libDenseCRF/densecrf.cpp libDenseCRF/filter.cpp libDenseCRF/permutohedral.cpp libDenseCRF/util.cpp libDenseCRF/densecrf.h libDenseCRF/fastmath.h libDenseCRF/permutohedral.h libDenseCRF/sse_defs.h libDenseCRF/util.h
 	$(CC) libDenseCRF/bipartitedensecrf.cpp libDenseCRF/densecrf.cpp libDenseCRF/filter.cpp libDenseCRF/permutohedral.cpp libDenseCRF/util.cpp -c $(CFLAGS)
@@ -30,3 +22,5 @@ prog_refine_pascal: refine_pascal/dense_inference.cpp refine_pascal/dense_infere
 prog_refine_pascal_v4: refine_pascal_v4/dense_inference.cpp util/Timer.h libDenseCRF.a
 	$(CC) refine_pascal_v4/dense_inference.cpp -o prog_refine_pascal_v4 $(CFLAGS) -L. -lDenseCRF -lmatio -I./util/
 
+prog_bin2ppm: bin2ppm.cpp util/Timer.h libDenseCRF.a
+	$(CC) bin2ppm.cpp -o prog_bin2ppm $(CFLAGS) -L. -lDenseCRF -I./util/
