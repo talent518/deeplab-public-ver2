@@ -4,7 +4,7 @@
 ROOT_DIR=
 
 CAFFE_DIR=..
-CAFFE_BIN=${CAFFE_DIR}/.build_release/tools/caffe.bin
+CAFFE_BIN=${CAFFE_DIR}/build/tools/caffe
 
 EXP=voc12
 
