@@ -10,7 +10,10 @@
     cmake .. -DUSE_CUDNN=OFF
     make
     ```
-  4. 
+  4. 紧CPU模式，命令如下：
+    ```
+    cmake  .. -DCPU_ONLY=ON -DCMAKE_CXX_FLAGS="-I/usr/local/cuda/include" 
+    ```
 
 ### 脚本说明(以下脚本必须在目录exper下执行，即使用cd或pushd进入exper目录)
   1. run_pascal.sh 基于GPU方式训练并测试
