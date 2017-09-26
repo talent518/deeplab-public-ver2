@@ -3,6 +3,7 @@ import scipy.io as sio
 import argparse
 import numpy as np
 import os
+import time
 
 # colour map
 label_colours = [(0,0,0)
@@ -17,9 +18,17 @@ label_colours = [(0,0,0)
                 # 16=potted plant, 17=sheep, 18=sofa, 19=train, 20=tv/monitor
 
 def mat2jpg(matFile, jpgFile, matKey='data', num_classes=21):
-    if os.path.exists(jpgFile) and os.path.getmtime(jpgFile) > os.path.getmtime(matFile):
-       return
- 
+    if os.path.exists(jpgFile):
+       mtime = os.path.getmtime(jpgFile)
+       if mtime < os.path.getmtime(matFile):
+           newJpgFile = '%s-%s.jpg' % (jpgFile[:-4], time.strftime('%Y%m%d%H%M%S',time.localtime(mtime)))
+           os.rename(jpgFile, newJpgFile)
+           print '%s Rename' % (newJpgFile)
+       else:
+           print '%s 0s' % (jpgFile)
+           return
+
+    btime = time.time() 
     mat = sio.loadmat(matFile)
     mask = mat[matKey]
     h, w, c, n = mask.shape
@@ -44,7 +53,7 @@ def mat2jpg(matFile, jpgFile, matKey='data', num_classes=21):
     im = Image.fromarray(outputs[0])
     im.save(jpgFile, quality=100)
 
-    print jpgFile
+    print '%s %.2fs' % (jpgFile, time.time()-btime)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="mat(from matio library save) format file convert to jpg format file")
