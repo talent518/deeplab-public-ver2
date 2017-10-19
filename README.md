@@ -15,14 +15,14 @@
     cmake  .. -DCPU_ONLY=ON -DCMAKE_CXX_FLAGS="-I/usr/local/cuda/include"
     ```
   5. [ubuntu上Caffe使用OpenBLAS多线程加速](http://blog.csdn.net/u013983674/article/details/71479849)
-    ```
+```
     apt install libopenblas-dev
     
     cmake  .. -DCPU_ONLY=ON -DCMAKE_CXX_FLAGS="-I/usr/local/cuda/include" -DBLAS=open
     export OPENBLAS_NUM_THREADS=6
     cd exper
     ./run_pascal_cpu.sh
-    ```
+```
 
 ### 脚本说明(以下脚本必须在目录exper下执行，即使用cd或pushd进入exper目录)
   1. run_pascal.sh 基于GPU方式训练并测试
