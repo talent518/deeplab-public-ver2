@@ -1,19 +1,19 @@
 ## DeepLab v2
 
-### 编译要求
+### 编译要求(ubuntu16.04编译通过)
   1. 必须是gcc 5.0以上版本；
   2. 必须安装库：opencv,boost,matio,cuda,hdf5,atlas,blas,protobuf,glob,gflags；
   3. cmake编译时需要禁用cudnn，命令如下：
-    ```
+```
     mkdir build
     cd build
     cmake .. -DUSE_CUDNN=OFF
     make
-    ```
+```
   4. 紧CPU模式，命令如下：
-    ```
+```
     cmake  .. -DCPU_ONLY=ON -DCMAKE_CXX_FLAGS="-I/usr/local/cuda/include"
-    ```
+```
   5. [ubuntu上Caffe使用OpenBLAS多线程加速](http://blog.csdn.net/u013983674/article/details/71479849)
 ```
     apt install libopenblas-dev
