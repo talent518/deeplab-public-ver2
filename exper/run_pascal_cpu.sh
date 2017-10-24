@@ -76,7 +76,8 @@ if [ ${RUN_TRAIN} -eq 1 ]; then
     #
     echo Training net ${EXP}/${NET_ID}
     for pname in train solver; do
-		sed "$(eval echo $(cat sub.sed));s|GPU|CPU|g" ${CONFIG_DIR}/${pname}.prototxt > ${CONFIG_DIR}/${pname}_${TRAIN_SET}.prototxt
+		sed "$(eval echo $(cat sub.sed))" ${CONFIG_DIR}/${pname}.prototxt > ${CONFIG_DIR}/${pname}_${TRAIN_SET}.prototxt
+		sed -i 's|GPU|CPU|g' ${CONFIG_DIR}/${pname}_${TRAIN_SET}.prototxt
     done
     CMD="${CAFFE_BIN} train --solver=${CONFIG_DIR}/solver_${TRAIN_SET}.prototxt" 
 	if [ -f ${MODEL} ]; then
@@ -101,7 +102,8 @@ if [ ${RUN_TEST} -eq 1 ]; then
 		mkdir -p ${FEATURE_DIR}/${TEST_SET}/fc8
         mkdir -p ${FEATURE_DIR}/${TEST_SET}/fc9
 		mkdir -p ${FEATURE_DIR}/${TEST_SET}/seg_score
-		sed "$(eval echo $(cat sub.sed));s|GPU|CPU|g ${CONFIG_DIR}/test.prototxt > ${CONFIG_DIR}/test_${TEST_SET}.prototxt
+		sed "$(eval echo $(cat sub.sed))" ${CONFIG_DIR}/test.prototxt > ${CONFIG_DIR}/test_${TEST_SET}.prototxt
+		sed -i 's|GPU|CPU|g' ${CONFIG_DIR}/test_${TEST_SET}.prototxt
 		CMD="${CAFFE_BIN} test --model=${CONFIG_DIR}/test_${TEST_SET}.prototxt --weights=${MODEL} --iterations=${TEST_ITER}"
 		echo Running ${CMD} && ${CMD}
     done
@@ -128,7 +130,8 @@ if [ ${RUN_TRAIN2} -eq 1 ]; then
     #
     echo Training2 net ${EXP}/${NET_ID}
     for pname in train solver2; do
-		sed "$(eval echo $(cat sub.sed));s|GPU|CPU|g" ${CONFIG_DIR}/${pname}.prototxt > ${CONFIG_DIR}/${pname}_${TRAIN_SET}.prototxt
+		sed "$(eval echo $(cat sub.sed))" ${CONFIG_DIR}/${pname}.prototxt > ${CONFIG_DIR}/${pname}_${TRAIN_SET}.prototxt
+		sed -i 's|GPU|CPU|g' ${CONFIG_DIR}/${pname}_${TRAIN_SET}.prototxt
     done
     CMD="${CAFFE_BIN} train --solver=${CONFIG_DIR}/solver2_${TRAIN_SET}.prototxt --weights=${MODEL}"
 	echo Running ${CMD} && ${CMD}
@@ -149,8 +152,10 @@ if [ ${RUN_TEST2} -eq 1 ]; then
 		FEATURE_DIR=${EXP}/features2/${NET_ID}
 		mkdir -p ${FEATURE_DIR}/${TEST_SET}/fc8
 		mkdir -p ${FEATURE_DIR}/${TEST_SET}/crf
-		sed "$(eval echo $(cat sub.sed));s|GPU|CPU|g" ${CONFIG_DIR}/test.prototxt > ${CONFIG_DIR}/test_${TEST_SET}.prototxt
+		sed "$(eval echo $(cat sub.sed))" ${CONFIG_DIR}/test.prototxt > ${CONFIG_DIR}/test_${TEST_SET}.prototxt
+		sed -i 's|GPU|CPU|g' ${CONFIG_DIR}/test_${TEST_SET}.prototxt
 		CMD="${CAFFE_BIN} test --model=${CONFIG_DIR}/test_${TEST_SET}.prototxt --weights=${MODEL} --iterations=${TEST_ITER}"
 		echo Running ${CMD} && ${CMD}
     done
 fi
+

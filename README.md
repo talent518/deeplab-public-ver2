@@ -23,6 +23,15 @@
     cd exper
     ./run_pascal_cpu.sh
 ```
+  6. centos编译
+```
+    yum install protobuf-devel leveldb-devel snappy-devel opencv-devel boost-devel hdf5-devel
+    yum install gflags-devel glog-devel lmdb-devel atlas-devel openblas-devel
+    export OPENBLAS_NUM_THREADS=6
+    make -f Makefile.centos
+    cd exper
+    ./run_pascal_cpu.sh
+```
 
 ### 脚本说明(以下脚本必须在目录exper下执行，即使用cd或pushd进入exper目录)
   1. run_pascal.sh 基于GPU方式训练并测试

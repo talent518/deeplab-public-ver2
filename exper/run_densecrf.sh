@@ -44,9 +44,9 @@ SAVE_DIR=${EXPER_DIR}/${DATASET}/res/${FEATURE_NAME}/${MODEL_NAME}/${TEST_SET}/$
 echo "SAVE TO ${SAVE_DIR}"
 
 if [ "${EXPER_DIR}" == "." ]; then
-    CRF_DIR=../densecrf
+	CRF_DIR=../densecrf
 else
-    CRF_DIR=$(dirname $EXPER_DIR)/densecrf
+	CRF_DIR=$(dirname $EXPER_DIR)/densecrf
 fi
 
 # NOTE THAT the densecrf code only loads ppm images
@@ -54,13 +54,13 @@ IMG_DIR=${EXPER_DIR}/${DATASET}/dataset/PPMImages
 
 if [ ${LOAD_MAT_FILE} == 1 ]
 then
-    # the features are saved in .mat format
-    CRF_BIN=${CRF_DIR}/prog_refine_pascal_v4
-    FEATURE_DIR=${EXPER_DIR}/${DATASET}/${FEATURE_NAME}/${MODEL_NAME}/${TEST_SET}/${FEATURE_TYPE}
+	# the features are saved in .mat format
+	CRF_BIN=${CRF_DIR}/prog_refine_pascal_v4
+	FEATURE_DIR=${EXPER_DIR}/${DATASET}/${FEATURE_NAME}/${MODEL_NAME}/${TEST_SET}/${FEATURE_TYPE}
 else
-    # the features are saved in .bin format (has called SaveMatAsBin.m in the densecrf/my_script)
-    CRF_BIN=${CRF_DIR}/prog_refine_pascal
-    FEATURE_DIR=${EXPER_DIR}/${DATASET}/${FEATURE_NAME}/${MODEL_NAME}/${TEST_SET}/${FEATURE_TYPE}/bin
+	# the features are saved in .bin format (has called SaveMatAsBin.m in the densecrf/my_script)
+	CRF_BIN=${CRF_DIR}/prog_refine_pascal
+	FEATURE_DIR=${EXPER_DIR}/${DATASET}/${FEATURE_NAME}/${MODEL_NAME}/${TEST_SET}/${FEATURE_TYPE}/bin
 fi
 
 if [ ! -f "${CRF_BIN}" ]; then
@@ -74,7 +74,7 @@ mkdir -p ${SAVE_DIR}
 # run the program
 INIT=${EXPER_DIR}/${DATASET}/init.sh
 if [ -f $INIT ]; then
-    sh $INIT
+	sh $INIT
 fi
 ${CRF_BIN} -id ${IMG_DIR} -fd ${FEATURE_DIR} -sd ${SAVE_DIR} -i ${MAX_ITER} -px ${POS_X_STD} -py ${POS_Y_STD} -pw ${POS_W} -bx ${Bi_X_STD} -by ${Bi_Y_STD} -br ${Bi_R_STD} -bg ${Bi_G_STD} -bb ${Bi_B_STD} -bw ${Bi_W}
 
