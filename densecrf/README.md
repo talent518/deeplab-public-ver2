@@ -19,3 +19,6 @@ Please see run_densecrf.sh for examples of input arguments or see the dense_infe
 ### Caffe wrapper
 
 We have also provided a wrapper for Philipp's implementation in Caffe (see the layer densecrf_layer.cpp)
+
+centos:
+  Run make command: make -f Makefile.centos
