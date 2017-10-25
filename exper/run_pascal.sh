@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh --login
 
 ## MODIFY PATH for YOUR SETTING
 ROOT_DIR=

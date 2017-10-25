@@ -31,6 +31,15 @@
     make -f Makefile.centos
     cd exper
     ./run_pascal_cpu.sh
+
+    # cmake build
+    mkdir build
+    cd build
+    LDFLAGS=/usr/lib64/libc_nonshared.a cmake  .. -DCPU_ONLY=ON -DCMAKE_CXX_FLAGS="-I/usr/local/cuda/include" -DBLAS=open -DBOOST_LIBRARYDIR=/usr/lib64 -DGFLAGS_LIBRARY=/usr/lib64 -DPROTOBUF_LIBRARY=/usr/lib64
+    make -j4
+    export OPENBLAS_NUM_THREADS=6
+    cd exper
+    ./run_pascal_cpu.sh
 ```
 
 ### 脚本说明(以下脚本必须在目录exper下执行，即使用cd或pushd进入exper目录)
